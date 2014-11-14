@@ -36,8 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'trivia2.apps.pregunta'
-    'trivia2.apps.usuario'
+    'trivia2.apps.pregunta',
+    'trivia2.apps.usuario',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,6 +87,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS=(os.path.join(BASE_DIR,"sistema/plantillas"),)
-STATICFILES_DIRS=(os.path.join(BASE_DIR,"sistema/static"),)
-MEDIA_ROOT=os.path.join(BASE_DIR,'sistema/media')
+TEMPLATE_DIRS=(os.path.join(BASE_DIR,"trivia2/plantillas"),)
+STATICFILES_DIRS=(os.path.join(BASE_DIR,"trivia2/static"),)
+MEDIA_ROOT=os.path.join(BASE_DIR,'trivia2/media')
