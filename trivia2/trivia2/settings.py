@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'trivia2.apps.pregunta'
+    'trivia2.apps.usuario'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,15 +60,18 @@ WSGI_APPLICATION = 'trivia2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'triviav2',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
+        'USER':'root'
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-bo'
 
 TIME_ZONE = 'UTC'
 
@@ -81,3 +86,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_DIRS=(os.path.join(BASE_DIR,"sistema/plantillas"),)
+STATICFILES_DIRS=(os.path.join(BASE_DIR,"sistema/static"),)
+MEDIA_ROOT=os.path.join(BASE_DIR,'sistema/media')
