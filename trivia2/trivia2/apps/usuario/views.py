@@ -46,10 +46,10 @@ def login_view(request):
 				if acceso.is_active:
 					login(request, acceso)
 					del request.session['cont']
-					return HttpResponseRedirect("/user/perfil/")
+					return HttpResponseRedirect("/perfil/")
 				else:
 					login(request, acceso)
-					return HttpResponseRedirect("/user/active/")
+					return HttpResponseRedirect("/activar/")
 			else:
 				request.session['cont']=request.session['cont']+1
 				aux=request.session['cont']
@@ -65,3 +65,28 @@ def login_view(request):
 		request.session['cont']=0
 		formulario=AuthenticationForm()
 	return render_to_response("user/login.html",{'formulario':formulario},context_instance=RequestContext(request))
+
+def activar_view(request):
+	if request.user.is_authenticated():
+		usuario=request.user
+		if usuario.is_active:
+			return HttpResponseRedirect("/perfil/")
+		else:
+			if request.method=="POST":
+				u=User.objects.get(username=usuario)
+				perfil=Perfil.objects.get(user=u)
+				formulario=fperfil(request.POST,request.FILES,instance=perfil)
+				if formulario.is_valid():
+					formulario.save()
+					u.is_active=True
+					u.save()
+					return HttpResponseRedirect("/perfil/")
+			else:
+				formulario=fperfil()
+			return render_to_response("user/activar.html",{'formulario':formulario},context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect("/login/")
+
+
+def perfil_view(request):
+	return render_to_response("user/perfil.html",{},context_instance=RequestContext(request))

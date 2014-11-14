@@ -6,4 +6,6 @@ urlpatterns = patterns('',
     url(r'^$', index),
     url(r'^registro/$',registro_view),
     url(r'^login/$',login_view),
+    url(r'^activar/$',activar_view),
+    url(r'^perfil/$',perfil_view),
 )

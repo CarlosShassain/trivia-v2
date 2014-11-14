@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+	    <title>Registro usuario</title>
+{% endblock %}
+
+{% block content %}
+	{% include "includes/cabezal.html" %}
+	<div class="container page">
+		<div class="row">
+			<div class="col-xs-12">
+			<h2>Bienvenido {{ user.get_full_name }}</h2><br>
+			<h2>Pais : {{user.perfil.pais }}</h2>
+			<img src="/media/{{ user.perfil.avatar}}" alt="avatar">
+			<img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar">
+			<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+			</div>
+		</div>
+	</div>
+	{% include "includes/pie.html" %}
+{% endblock %}
