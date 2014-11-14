@@ -1,8 +1,12 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-hola mundo
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+	    <title>Inicio</title>
+{% endblock %}
+
+{% block content %}
+	{% include "includes/cabezal.html" %}
+	hola mundo...
+
+	{% include "includes/pie.html" %}
+{% endblock %}

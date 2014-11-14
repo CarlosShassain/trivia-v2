@@ -90,3 +90,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS=(os.path.join(BASE_DIR,"trivia2/plantillas"),)
 STATICFILES_DIRS=(os.path.join(BASE_DIR,"trivia2/static"),)
 MEDIA_ROOT=os.path.join(BASE_DIR,'trivia2/media')
+
+#Capcha
+RECAPTCHA_PUBLIC_KEY = '6LcOTvwSAAAAAMQYA4DpRIL-0z7v4cQXZghF7yp4'
+RECAPTCHA_PRIVATE_KEY = '6LcOTvwSAAAAAEu9W75F_mKDpQUwS8dYcuZNXkgs'
