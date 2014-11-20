@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{%block title%}
+		<title>registro de categorias</title>
+{%endblock%}
+
+{% block container %}
+	{% include "includes/cabezal.html" %}
+
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide wet-asphalt">
+            <ol class="carousel-indicators">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content centered">
+                                      <div class="span7">
+                                        <div class="well">
+                                            <h2 class="text-center">crear respuestas</h2>
+                                            <form class="form-horizontal text-center center-block" id="registerForm" action="" method="post">
+                                                {{form.as_ul}}
+                                                {% csrf_token %}
+                                                <br>
+                                                <button type="submit" class="btn btn-primary">aceptar</button>
+                                            </form>
+
+                                        </div>
+                                    </div>                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include "includes/pie.html" %}
+{%endblock%}
