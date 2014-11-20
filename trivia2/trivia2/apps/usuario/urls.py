@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^login/$',login_view),
     url(r'^activar/$',activar_view),
     url(r'^perfil/$',perfil_view),
+    url(r'^logout/$',logout_view),
 )

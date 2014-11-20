@@ -1,5 +1,56 @@
 
-			<ul>
-			  <li class="active"><a href="/">Inicio</a></li>
-			  <li><a href="/registro/">Registro</a></li>
-			</ul>
+<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h2>Triviador</h2>
+               <h5>uatf</h5>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {%if not user.is_anonymous%}
+                    <li><h5>Bienvenido {{ user.get_full_name }}</h5></li>
+
+                    <li><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar"></li>
+                    
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones <i class="icon-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Editar datos</a></li>
+                            <li><a href="#">Seguridad</a></li>
+                            <li class="divider"></li>
+                                <li><a href="/logout/">LogOut</a></li>
+                        </ul>
+                    </li>
+                    {%endif%}
+                    {% if user.is_anonymous%}
+
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/registro/">registrate</a></li>
+                    <li><a href="/login/">login</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">otras paginas <i class="icon-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="career.html">text1</a></li>
+                            <li><a href="blog-item.html">TEXT 2</a></li>
+                            <li><a href="pricing.html">text3</a></li>
+                            <li><a href="404.html">text4</a></li>
+                            <li><a href="registration.html">text5</a></li>
+                            <li class="divider"></li>
+                            <li><a href="privacy.html">text 6</a></li>
+                        </ul>
+                    </li>
+                    {%endif%}
+                    
+                    <li><a href="/blog/preguntas/">preguntas</a></li> 
+                    <li><a href="/blog/respuestas/">respuestas</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>

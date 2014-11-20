@@ -4,19 +4,66 @@
 	    <title>Activar Cuenta</title>
 {% endblock %}
 
-{% block content %}
+{% block container %}
 	{% include "includes/cabezal.html" %}
-	<div class="container page">
-		<div class="row">
-			<div class="col-xs-12">
-			<form action="" method="post" enctype="multipart/form-data">
-				{% csrf_token %}
-				{{ formulario.as_p }}
-				<button type="submit" class="btn btn-primary">Activar Cuenta</button>
-			</form>
-				
-			</div>
-		</div>
-	</div>
+	
+
+
+
+	<section id="main-slider" class="no-margin">
+        <div class="carousel slide wet-asphalt">
+            <ol class="carousel-indicators">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content centered">
+                                <h2 class="animation animated-item-1">Login</h2>
+                                    <div class="row" >
+							            <aside class="col-sm-4 col-sm-push-8">
+							                <div class="widget search">
+							                    <form role="form">
+							                        <div class="input-group">
+							                            <input type="text" class="form-control" autocomplete="off" placeholder="Search">
+							                            <span class="input-group-btn">
+							                                <button class="btn btn-danger" type="button"><i class="icon-search"></i></button>
+							                            </span>
+							                        </div>
+							                    </form>
+							                </div>
+							                <img class="img-responsive img-blog" src="/static/images/blog/blog2.jpg" width="100%" alt="" />
+							            </aside>        
+							            <div class="col-sm-8 col-sm-pull-4" >
+							                <div class="blog" >
+							                    <div class="blog-item" style="background-image: url(/static/images/slider/bg1.jpg)">
+							                        <div class="container page">
+														<div class="row">
+															<div class="col-xs-12">
+															<form action="" method="post" enctype="multipart/form-data">
+															<br>
+															<br>
+																{% csrf_token %}
+																{{ formulario.as_p }}
+																<button type="submit" class="btn btn-primary">Activar Cuenta</button>
+															</form>
+																
+															</div>
+														</div>
+													</div>
+							                    </div>
+							                </div>
+							            </div>
+							        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 	{% include "includes/pie.html" %}
 {% endblock %}

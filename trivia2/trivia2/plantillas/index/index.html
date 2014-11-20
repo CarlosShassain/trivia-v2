@@ -1,12 +1,10 @@
-{% extends "base.html" %}
-
-{% block title %}
-	    <title>Inicio</title>
-{% endblock %}
-
-{% block content %}
-	{% include "includes/cabezal.html" %}
-	hola mundo...
-
-	{% include "includes/pie.html" %}
-{% endblock %}
+{%extends "base.html"%}
+{%block title%}
+		<title>Triviador</title>
+{%endblock%}
+{%block container%}
+{% include "includes/cabezal.html" %}
+	{% include "includes/carrusel.html" %}
+	
+{% include "includes/pie.html" %}
+{%endblock%}

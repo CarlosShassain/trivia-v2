@@ -1,16 +1,10 @@
 {% extends "base.html" %}
-
-{% block title %}
-	    <title>Registro usuario</title>
-{% endblock %}
-
-{% block content %}
-	{% include "includes/cabezal.html" %}
-		<form acion="" method="post">
-			<legend>Formulario de registro</legend>
-		    {% csrf_token %}
-			{{ formulario.as_p }}
-		    <button type="submit" class="btn btn-primary">Registrar</button>
-		</form>
-	{% include "includes/pie.html" %}
-{% endblock %}
+{%block title%}
+		<title>registro de usuarios</title>
+{%endblock%}
+{% block container %}
+{% include "includes/cabezal.html" %}
+    {%include "includes/carrusel.html"%}
+    {%include "includes/registro.html"%}
+    {% include "includes/pie.html" %}
+{%endblock%}

@@ -1,44 +1,95 @@
+
+
+
 {% extends "base.html" %}
-
-{% block title %}
-	    <title>Login</title>
-{% endblock %}
-
-{% block content %}
-	{% include "includes/cabezal.html" %}
-	<div class="container page">
-		<div class="row">
-			<div class="col-xs-12">
-			{% if estado %}
-				<div class="alert alert-danger" role="alert">{{mensaje}} <span class="glyphicon glyphicon-warning-sign"></span></div>
-			{% endif %}
-			<form class="form-horizontal" role="form" method="post">
-			{% csrf_token %}
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Nick :</label>
-			    <div class="col-sm-3">
-			      <input type="text" class="form-control" name="username" id="inputEmail3" placeholder="Ingrese su nick">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">Contraseña :</label>
-			    <div class="col-sm-4">
-			      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Ingrese la contraseña">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			  	<div class="col-sm-offset-2 col-sm-10">
-			  		{{formulario2.as_p}}
-			  	</div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-primary">Ingresar</button>
-			    </div>
-			  </div>
-			</form>				
-			</div>
-		</div>
-	</div>
+{%block title%}
+		<title>registro de usuarios</title>
+{%endblock%}
+{% block container %}
+{% include "includes/cabezal.html" %}
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide wet-asphalt">
+            <ol class="carousel-indicators">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content centered">
+                                <h2 class="animation animated-item-1">Login</h2>
+                                    <div class="row" >
+							            <aside class="col-sm-4 col-sm-push-8">
+							                <div class="widget search">
+							                    <form role="form">
+							                        <div class="input-group">
+							                            <input type="text" class="form-control" autocomplete="off" placeholder="Search">
+							                            <span class="input-group-btn">
+							                                <button class="btn btn-danger" type="button"><i class="icon-search"></i></button>
+							                            </span>
+							                        </div>
+							                    </form>
+							                </div>
+							                <img class="img-responsive img-blog" src="/static/images/blog/blog2.jpg" width="100%" alt="" />
+							            </aside>        
+							            <div class="col-sm-8 col-sm-pull-4" >
+							                <div class="blog" >
+							                    <div class="blog-item" style="background-image: url(/static/images/slider/bg1.jpg)">
+							                        <div class="container page">
+														<div class="row">
+															<div class="col-xs-12">
+															<br>
+															<br>
+															
+															<form class="form-horizontal" role="form" method="post">
+															{% csrf_token %}
+															  <div class="form-group">
+															    <label for="inputEmail3" class="col-sm-2 control-label">Nick :</label>
+															    <div class="col-sm-3">
+															      <input type="text" class="form-control" name="username" id="inputEmail3" placeholder="Ingrese su nick">
+															    </div>
+															  </div>
+															  <div class="form-group">
+															    <label for="inputPassword3" class="col-sm-2 control-label">Contraseña :</label>
+															    <div class="col-sm-4">
+															      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Ingrese la contraseña">
+															    </div>
+															  </div>
+															  <div class="form-group">
+															  	<div class="col-sm-offset-2 col-sm-10">
+															  		{{formulario2.as_p}}
+															  	</div>
+															  </div>
+															  <div class="form-group">
+															    <div class="col-sm-offset-2 col-sm-10">
+															      <button type="submit" class="btn btn-primary">Ingresar</button>
+															    </div>
+															    {% if estado %}
+															    <br>
+															      <button type="" class="btn btn-danger">Olvidate tu contraseña</button>
+															    <br>
+															      <button type="" class="btn btn-primary">Registrate</button>	
+																{% endif %}	
+															  </div>
+															</form>	
+															{% if estado %}
+																<div class="alert alert-danger col-sm-2 col-sm-1" role="alert">{{mensaje}} <span class="glyphicon glyphicon-warning-sign"></span></div>
+															{% endif %}			
+															</div>
+														</div>
+													</div>
+							                    </div>
+							                </div>
+							            </div>
+							        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 	{% include "includes/pie.html" %}
-{% endblock %}
+{%endblock%}
