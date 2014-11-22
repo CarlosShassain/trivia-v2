@@ -23,7 +23,7 @@ def registro_view(request):
 			usuario.is_active=False
 			usuario.save()
 			perfil=Perfil.objects.create(user=usuario)
-			return HttpResponse("Registrado")
+			return HttpResponseRedirect("/login/")
 	else:
 		formulario_registro=fusuario()
 	return render_to_response("user/registrarse.html",{'formulario':formulario_registro},context_instance=RequestContext(request))

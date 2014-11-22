@@ -5,6 +5,8 @@
 {%block container%}
 {% include "includes/cabezal.html" %}
 	{% include "includes/carrusel.html" %}
-	
+	{% if not user.is_anonymous%}
+	{% include "games/game_starting.html" %}
+	{%endif%}
 {% include "includes/pie.html" %}
 {%endblock%}
