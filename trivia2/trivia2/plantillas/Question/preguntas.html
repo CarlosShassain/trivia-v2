@@ -5,31 +5,39 @@
 
 {% block container %}
 	{% include "includes/cabezal.html" %}
-
-    <section id="main-slider" class="no-margin">
+<section id="main-slider" class="no-margin">
         <div class="carousel slide wet-asphalt">
-            <ol class="carousel-indicators">
-                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
-            </ol>
             <div class="carousel-inner">
                 <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="carousel-content centered">
-                                    <div class="span7">
-										<div class="well">
-											<h2 class="text-center">crear nueva pregunta</h2>
-											<form class="form-horizontal text-center center-block" id="registerForm" action="" method="post">
-												{{form.as_ul}}
-												{% csrf_token %}
-												<br>
-												<button type="submit" class="btn btn-primary">aceptar</button>
-											</form>
+                                <h2 class="animation animated-item-1">Registrarse</h2>
+                                    <div class="row" >
+                                        <aside class="col-sm-4 col-sm-push-8">
 
-										</div>
-									</div>
-                                    
+                                        </aside>        
+                                        <div class="col-sm-8 col-sm-pull-4" >
+                                            <div class="blog" >
+                                                <div class="blog-item" style="background-image: url(/static/images/form/form2.jpg)">
+                                                    <div class="container page">
+                                                        <div class="row">
+                                                            <div class="col-xs-2"></div>
+                                                            <div class="col-xs-8">
+                                                            <form class="form-horizontal" role="form" method="post">
+                                                                <legend>Formulario de registro</legend>
+                                                                        {{form.as_ul}}
+                                                                        {% csrf_token %}
+                                                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                                            </form>             
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -37,6 +45,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>                                                          
+                                                                       
     {% include "includes/pie.html" %}
 {%endblock%}
