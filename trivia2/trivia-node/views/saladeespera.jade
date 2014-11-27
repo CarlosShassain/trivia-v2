@@ -1,0 +1,28 @@
+extends layout
+block content
+ section(id="SalaEspera", class="container")
+  div(class="row")
+   div(class="col-sm-8")
+    h2 Esperando jugadores
+    div(class="panel panel-default")
+     div(class="panel-heading")
+     div(class="panel-body")
+      table(class="table table-striped")
+       tr
+        th Mensajes
+       tr
+        td
+         ul#mensajes
+     div(class="panel-footer")
+      input(type="text", class="form-control", placeholder="Escribir mensaje" id="mensaje")
+   div(class="col-sm-4")
+    h2 Triviador Dota 
+    div(class="panel panel-default")
+     div(class="panel-heading")
+     div(class="panel-body")
+      table(class="table")
+       tr
+        th Usuarios en sala
+       tr
+        td
+         ul#ususarios

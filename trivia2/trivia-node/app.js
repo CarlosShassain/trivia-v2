@@ -59,3 +59,8 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+var PORT=3000;
+var server=app.listen(PORT, function(){
+    console.log("servidor corriendo en el puerto "+ PORT);
+});

@@ -1,0 +1,50 @@
+extends layout
+block content
+ section(id="crearSala", class="container")
+  div(class="row")
+   div(class="col-sm-6")
+    h2 Crear Nueva Partida
+    form(class="center",role="form")
+     fieldset(class="resgistration-form")
+      div(class="form-group") Titulo
+       input(type="text", id="titulo", name="titulo", placeholder="Titulo" class="form-control")
+      div(class="form-group") Nro de Preguntas
+       select(class="form-control", placeholder="Preguntas")
+        option(value="5") 5
+        option(value="10") 10
+        option(value="15") 15
+        option(value="20") 20
+      div(class="form-group") Tiempo de Respuesta
+       select(class="form-control", placeholder="Preguntas")
+        option(value="10") 10 segundos
+        option(value="15") 15 segundos
+        option(value="20") 20 segundos
+        option(value="25") 25 segundos
+        option(value="30") 30 segundos
+        option(value="35") 35 segundos
+        option(value="40") 40 segundos
+        option(value="45") 45 segundos
+        option(value="50") 50 segundos
+        option(value="55") 55 segundos
+        option(value="60") 60 segundos
+      div(class="form-group") 
+       label() Radios
+       div(class="col-ms-10")
+        div(class="radio")
+         label() 1
+          input(type="radio")
+      div(class="form-group")
+       button(id="crear", class="btn btn-success btn-md btn-block") crear
+   div(class="col-sm-6")
+    h2 Partidas 
+    div
+     div(class="progress")
+      div(class="progress-bar progress-bar-danger", role="progressbar", aria-valuenow="90", aria-valuemin="0", aria-valuemax="100", style="width: 90%;")
+       span Partidas Ganadas
+     div(class="progress")
+      div(class="progress-bar progress-bar-success", role="progressbar", aria-valuenow="70", aria-valuemin="0", aria-valuemax="100", style="width: 70%;")
+       span Partidas Perdidas
+     div(class="progress")
+      div(class="progress-bar", role="progressbar", aria-valuenow="40", aria-valuemin="0", aria-valuemax="100", style="width: 40%;")
+       span Partidas Empatadas
+ section#partidas
