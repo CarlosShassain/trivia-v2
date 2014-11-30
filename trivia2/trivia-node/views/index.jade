@@ -1,3 +1,29 @@
 extends layout
 
 block content
+ include carrusel
+ -if(room.length>0)
+  section(id="uno",class="container")
+   ul(class="portfolio-filter")
+    li
+     a(class="btn btn-danger active", href="#", data-filter="*") mostrar todo
+    li
+     a(class="btn btn-default", href="#", data-filter=".item") Items
+    li
+     a(class="btn btn-default", href="#", data-filter=".heroes") Heroes
+    li
+     a(class="btn btn-default", href="#", data-filter=".poderes") Poderes
+
+   ul(class="portfolio-items col-4")
+    -for(i in room) 
+     li(class="portfolio-item notiene")
+      div(class="item-inner")
+       div(class="center")
+        p
+         img(class="img-responsive img-thumbnail img-circle", src="/images/blog/blog1.jpg" alt="algo")
+        h5 nivel dificil
+         small(class="designation muted") #{room[i].pregunta} preguntas
+        p no entrar si no sabes perder
+        p no tiene
+        a(href="#", class="btn btn-primary btn-md") Entrar
+        h5 #{room[i].titulo}
