@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^activar/$',activar_view),
     url(r'^perfil/$',perfil_view),
     url(r'^logout/$',logout_view),
+    url(r'^gamer/$',gamer_view),
 )

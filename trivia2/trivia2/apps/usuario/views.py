@@ -7,7 +7,7 @@ from .models import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate,logout
-
+from django.contrib.sessions.backends.db import SessionStore
 # Create your views here.
 def index(request):
 	usuarios=User.objects.all()
@@ -45,6 +45,11 @@ def login_view(request):
 			if acceso is not None:
 				if acceso.is_active:
 					login(request, acceso)
+					p=SessionStore()
+					p["name"]=usuario
+					p["estado"]="conectado"
+					p.save()
+					request.session["idkey"]=p.session_key
 					del request.session['cont']
 					return HttpResponseRedirect("/perfil/")
 				else:
@@ -90,6 +95,13 @@ def activar_view(request):
 
 def perfil_view(request):
 	return render_to_response("user/perfil.html",{},context_instance=RequestContext(request))
+def gamer_view(request):
+	idsession=request.session["idkey"]
+	return HttpResponseRedirect("http://localhost:3001/game/"+idsession)
 def logout_view(request):
+	p=SessionStore(session_key=request.session["idkey"])
+	p["estado"]="desconectado"
+	p["name"]=""
+	p.save()
 	logout(request)
 	return HttpResponseRedirect("/")

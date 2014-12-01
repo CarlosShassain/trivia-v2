@@ -1,6 +1,7 @@
 $(function($) {
+
 	var socket=io();
-	$("#crearpartida").click(function(event){
+	$("#crearPartida").click(function(event){
 		if($("#titulo").val()!=""){
 			socket.emit("NewGame",{"nameTitle":$("#titulo").val()});
 		}
@@ -18,16 +19,17 @@ $(function($) {
 		}
 	})
 	var loadhtml=function(url){
+		alert("entra mierda");
 		$.ajax({
-			url: 'url',
-			type: 'GET',
+			url: url,
+			type: 'POST',
 			dataType: 'html',
 			data: {},
 		})
 		.done(function(html) {
-			$("#content").html(html);
-			//habilitamos el envio de mensajes
+			$("#games").html(html);
 			//Games();
+			init_chat();
 		})
 		.fail(function() {
 			
@@ -36,4 +38,22 @@ $(function($) {
 			
 		});
 	}
+
+	//mensajes
+	var init_chat=function()
+	{
+		$("#mensaje").keydown(function(event){
+			if(event.keyCode==13)
+			{
+				socket.emit("mensajes",{"msj":$(this).val()})
+				$(this).val("");
+			}
+		});
+	}
+	socket.on("mensajes",function(response){
+        console.log(response);
+        $("#mensajes").append("<li>"+response.msn+"</li>")
+    });
+
+    //
 });

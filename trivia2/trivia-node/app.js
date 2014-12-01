@@ -8,6 +8,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 //var sala = require('./routes/partida');
+
+var rooms=require("./sala/rooms");
+var salas=rooms();
+
 var io=require("socket.io");
 var app = express();
 
@@ -78,12 +82,21 @@ var PORT=3001;
 var server=app.listen(PORT, function(){
     console.log("servidor corriendo en el puerto "+ PORT);
 });
-var rooms=[];
+var sala=[];
 var sockets=io(server);
 sockets.on("connection",function(socket){
+    sala=salas.getRoom();
+    if(sala.length > 0){
+        console.log("desde elservidor");
+        for (var i = 0; i < sala.length; i++) {
+            console.log(sala[i].titulo);
+        };
+    }
     socket.on("NewGame",function(cliente){
-        rooms.push(cliente.nameTitle);
         socket.emit("NewGame",{"bool":true,"nameTitle":cliente.nameTitle});
+    });
+    socket.on("mensajes",function(clientedata){
+        sockets.sockets.emit("mensajes",clientedata);
     });
 });
 
