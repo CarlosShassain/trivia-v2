@@ -1,0 +1,41 @@
+
+div(id="login-contenedor")
+	div(id="login")
+		h3 ¿Cual es tu nombre?
+		input(type="text", name="nick", placeholder="...", maxlength="20")
+		p(class="error")
+
+div(id="contenedor")
+	h1(class="titulo") 3 En Raya
+
+	div(id="minicontenedor")
+		div(id="tablero")
+			div(class="fila")
+				div(class="columna")
+				div(class="columna")
+				div(class="columna")
+			div(class="fila")
+				div(class="columna")
+				div(class="columna")
+				div(class="columna")
+			div(class="fila")
+				div(class="columna")
+				div(class="columna")
+				div(class="columna")
+
+		div(id="jugadores")
+			div(class="estado", data-jugador="1")
+				div(class="figura") X
+				div(class="nombre") Esperando jugador...
+			div(class="estado", data-jugador="2")
+				div(class="figura") O
+				div(class="nombre") Esperando jugador...
+			div(id="unirse")
+				Unirme
+
+	div(id="chat")
+		div(id="sala")
+			div(class="texto")
+
+			textarea(placeholder="...")
+		div(id="usuarios")

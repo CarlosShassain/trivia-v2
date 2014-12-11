@@ -19,11 +19,14 @@
                     <li><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar"></li>
                     
                     <li class="active"><a href="/">Home</a></li>
-                    <li class="active"><a href="/games/">jugar</a></li>
+                    <li><a href="/gamer/">jugar</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones <i class="icon-angle-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Editar datos</a></li>
+                            {%for item in menu%}
+                            <li><a href="{{item.url}}">{{item.label}}</a></li>
+                            {%endfor%}
+                            <li><a href="/editar/">Editar datos</a></li>
                             <li><a href="#">Seguridad</a></li>
                             <li class="divider"></li>
                                 <li><a href="/logout/">LogOut</a></li>
@@ -35,18 +38,6 @@
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/registro/">registrate</a></li>
                     <li><a href="/login/">login</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">otras paginas <i class="icon-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/pregunta/">preguntas</a></li> 
-                            <li><a href="/respuesta/">respuestas</a></li>
-                            <li><a href="/categoria/">Categorias</a></li>
-                            <li><a href="404.html">text4</a></li>
-                            <li><a href="registration.html">text5</a></li>
-                            <li class="divider"></li>
-                            <li><a href="privacy.html">text 6</a></li>
-                        </ul>
-                    </li>
                     {%endif%}
                 </ul>
             </div>

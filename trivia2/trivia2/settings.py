@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'trivia2.apps.pregunta',
     'trivia2.apps.usuario',
+    'captcha',
+    #'social_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,5 +94,29 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,"trivia2/static"),)
 MEDIA_ROOT=os.path.join(BASE_DIR,'trivia2/media')
 
 #Capcha
-RECAPTCHA_PUBLIC_KEY = '6LcOTvwSAAAAAMQYA4DpRIL-0z7v4cQXZghF7yp4'
-RECAPTCHA_PRIVATE_KEY = '6LcOTvwSAAAAAEu9W75F_mKDpQUwS8dYcuZNXkgs'
+RECAPTCHA_PUBLIC_KEY = '6Lc6tf4SAAAAABs8hOYSHFNaEjx5KV-r1AfFIwjT'
+RECAPTCHA_PRIVATE_KEY = '6Lc6tf4SAAAAAFn4vk-_7Grm6eBuKi6SoZJry7T6'
+
+
+#facebook
+#AUTHENTICATION_BACKENDS = (
+ #   'social_auth.backends.google.GoogleOAuth2Backend',
+  #  'social_auth.backends.facebook.FacebookBackend',
+   # 'django.contrib.auth.backends.ModelBackend',  
+#)
+#FACEBOOK_APP_ID = '539064209560004'
+
+#FACEBOOK_API_SECRET = '0a3b9982fc38723714affd8d62409000'
+
+#ACCOUNT_ACTIVATION_DAYS=7
+
+#FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+#LOGIN_REDIRECT_URL = '/'
+
+#LOGIN_URL = '/account/login/'
+
+#LOGIN_REDIRECT_URL = '/account/post_login/'
+
+#<<<<<<< HEAD
+#SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

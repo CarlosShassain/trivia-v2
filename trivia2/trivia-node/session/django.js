@@ -1,7 +1,7 @@
 var mysql=require("../db/mysql");
 var django=function()
 {
-	var query=new mysql({host:"localhost",user:"root",password:"",database:"chatgrafico"});
+	var query=new mysql({host:"localhost",user:"root",password:"",database:"triviav2"});
 	this.getSession=function(key,callback)
 	{
 		query.get("django_session").where({session_key:key}).execute(function(rows){

@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^perfil/$',perfil_view),
     url(r'^logout/$',logout_view),
     url(r'^gamer/$',gamer_view),
+    url(r'^editar/$',editar_perfil),
 )

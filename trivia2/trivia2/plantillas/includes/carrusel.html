@@ -14,6 +14,8 @@
                                     {% if not user.is_anonymous%}
                                     <h1 class="animation animated-item-1">Bienvenido {{ user.get_full_name }} a Triviador-Dota</h1>
                                     <p class="animation animated-item-2">Demustra cuanto sabes acerca de dota</p>
+                                    <img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+                                    <h1 class="animation animated-item-1">Conectado desde: {{ user.perfil.pais }}</h1>
                                     {%endif%}
                                     {%block containercarr%}
 
@@ -37,7 +39,9 @@
                         </div>
                         <div class="media-body">
                             <h3 class="media-heading">Twitter</h3>
+                            <a href="http://www.twitter.com">
                             <p>Envia tus sugerencias</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -48,19 +52,24 @@
                         </div>
                         <div class="media-body">
                             <h3 class="media-heading">Facebook</h3>
+                           <a href="http://www.fb.com">
                             <p>Envia tus sugerencias</p>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4 col-sm-6">                    
                     <div class="media">
                         <div class="pull-left">
                             <i class="icon-google-plus icon-md"></i>
                         </div>
                         <div class="media-body">
                             <h3 class="media-heading">Google</h3>
+                            <a href="http://www.gmail.com">
                             <p>Envia tus sugerencias</p>
+                            </a>
                         </div>
+                    
                     </div>
                 </div>
             </div>

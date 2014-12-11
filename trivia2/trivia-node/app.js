@@ -12,12 +12,16 @@ var users = require('./routes/users');
 var rooms=require("./sala/rooms");
 var salas=rooms();
 
+//var mysql=require("./db/mysql");
+//var query=mysql({host:"localhost",user:"root",password:"",database:"triviav2"});
+
 var io=require("socket.io");
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -73,8 +77,8 @@ module.exports = app;
 //post
 //post
 
-
-
+var session=require("./session/django");
+var reviewsession=session();
 
 
 //socket
@@ -83,8 +87,13 @@ var server=app.listen(PORT, function(){
     console.log("servidor corriendo en el puerto "+ PORT);
 });
 var sala=[];
+var names=Array();
 var sockets=io(server);
-sockets.on("connection",function(socket){
+var roomWait=Array();
+var idsala=1;
+var objectUser=Array();
+var contador=0;
+sockets.on("connection",function (socket){
     sala=salas.getRoom();
     if(sala.length > 0){
         console.log("desde elservidor");
@@ -92,11 +101,122 @@ sockets.on("connection",function(socket){
             console.log(sala[i].titulo);
         };
     }
-    socket.on("NewGame",function(cliente){
-        socket.emit("NewGame",{"bool":true,"nameTitle":cliente.nameTitle});
+    sockets.emit("conexion",{"nombres":names, "salas": sala});
+    
+    socket.on("setsession",function(clientdata){
+        socket.idsession=clientdata.idsession;
+        reviewsession.getSession(socket.idsession,function(r){
+            if(r)
+            {   
+                socket.emit("setsession",true);
+            }else
+            {
+                socket.emit("setsession",r);
+            }
+        });
     });
-    socket.on("mensajes",function(clientedata){
-        sockets.sockets.emit("mensajes",clientedata);
+
+    //cenvio de datos al cliente
+    socket.on("empezar",function(clientdata){
+
+        if(insertUser(clientdata.nick)){
+            names.push(clientdata.nick);
+        }
+        objectUser.push({nam:clientdata.nick, room:clientdata.room});
+        socket.leave(clientdata.room);
+        listar(objectUser);
+        socket.join(clientdata.room);
+        socket.emit("confirma_conexion",{"texto":"estas en la sala"+clientdata.room});
+        sockets.to(clientdata.room).emit("confirma_mensaje",{"msn":clientdata.nick+" se unio a la sala","nick":"server"}) 
+                        
+    });
+    /*socket.on("conexionR",function(){re
+        socket.emit("conexion",{"nombres":names, "salas": sala});
+    })*/
+    
+    socket.on("mensaje",function(data){
+        listar(objectUser);
+        var sa=buscaroom(objectUser, data.nick);
+        socket.room=sa;
+        socket.join(sa);
+        sockets.to(sa).emit("confirma_mensaje",data);    
+    });
+
+    //cambia sala
+    socket.on("SetRoom",function(data){
+        if(insertRoom(data.titulo,socket)){
+            console.log(data.titulo+"desde server");
+            for (var i = 0; i < objectUser.length; i++) {
+                if(objectUser[i].nam==data.nick){
+                    objectUser[i].room=data.titulo;
+                }
+            };
+            var sala=data.titulo;
+            socket.leave(sala);
+            socket.room=sala;
+            socket.join(sala);
+            socket.emit("confirma_room");
+            sockets.emit("confirma_mensaje",{"msn":data.nick+" cambio de sala","nick":"server"})
+        }
+    });
+
+    //une a l room
+    socket.on("unirseAsala",function(data){
+        console.log("unirse a sala ................................:"+data.nick)
+        for (var i = 0; i < objectUser.length; i++) {
+            if(objectUser[i].nam==data.nick){
+                objectUser[i].room=data.titulo;
+            }
+        };
+        socket.emit("confirma_unirse",data);
+    });
+
+    //star games
+    socket.on("stargame",function(data){
+            socket.join(data.titulo);
+            sockets.to(data.titulo).emit("confirma_stargame",data);
+        
     });
 });
+var buscaroom=function(obj, date){
+    for (var i = 0; i < obj.length; i++) {
 
+        if(obj[i].nam==date)
+            return obj[i].room; 
+    };
+    return null;
+}
+var listar=function(obj){
+    for (var i = 0; i < obj.length; i++) {
+        console.log(obj[i])
+    };
+}
+var insertUser=function (nombre){
+    for (var i = 0; i < names.length; i++) {
+        if(names[i]==nombre){
+            return false;
+        }
+    };
+    return true;
+}
+var insertRoom=function (nombre,socket){
+    sa=salas.getRoom();
+    var con=0;
+    var id=0;
+    for (var i = 0; i < sa.length; i++) {
+        if(sa[i].titulo==nombre){
+            con=con+1;
+            console.log(sa[i].titulo+".................................");
+            id=sa[i].id;
+        }
+    };
+    console.log("contanos "+con +" y otro:"+id)
+    if(con>=2){
+        salas.deleteRoom(id);
+        return false;
+    }
+    else{
+        socket.idsala=id;
+        return true;
+    }
+}

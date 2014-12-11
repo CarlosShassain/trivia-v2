@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{%block title%}
+		<title>registro de usuarios</title>
+{%endblock%}
+{% block container %}
+{% include "includes/cabezal.html" %}
+<section id="main-slider" class="no-margin">
+        <div class="carousel slide wet-asphalt">
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content centered">
+                                <h2 class="animation animated-item-1">Modifica tus datos</h2>
+                                    <div class="row" >
+							            <aside class="col-sm-4 col-sm-push-8">
+
+							            </aside>        
+							            <div class="col-sm-8 col-sm-pull-4" >
+							                <div class="blog" >
+							                    <div class="blog-item" style="background-image: url(/static/images/form/form1.jpg)">
+							                        <div class="container page">
+														<div class="row">
+															<div class="col-xs-2"></div>
+															<div class="col-xs-8">
+															<form class="form-horizontal" role="form" method="post">
+																<legend>Formulario de registro</legend>
+														        {% csrf_token %}
+														        
+																{{ formulario.as_p }}
+														            <button type="submit" class="btn btn-primary">Modificar</button>
+														    </form>				
+															</div>
+														</div>
+													</div>
+							                    </div>
+							                </div>
+							            </div>
+							        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include "includes/pie.html" %}
+{%endblock%}

@@ -6,4 +6,8 @@ urlpatterns = patterns('',
     url(r'^categoria/', categoria_view),
     url(r'^pregunta/', pregunta_view),
     url(r'^respuesta/', respuesta_view),
+    url(r'^gestion/', gestion_preguntas),
+    url(r'^modificar/(?P<id>\d+)/$', modificar_pregunta),
+    url(r'^eliminar/(?P<id>\d+)/$',eliminar_pregunta),
+    
 )

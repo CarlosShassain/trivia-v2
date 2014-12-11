@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {%block title%}
-		<title>registro de categorias</title>
+		<title>registro de preguntas</title>
 {%endblock%}
 
 {% block container %}
 	{% include "includes/cabezal.html" %}
-
-    <section id="main-slider" class="no-margin">
+<section id="main-slider" class="no-margin">
         <div class="carousel slide wet-asphalt">
             <div class="carousel-inner">
                 <div class="item active" style="background-image: url(/static/images/slider/bg1.jpg)">
@@ -14,7 +13,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="carousel-content centered">
-                                <h2 class="animation animated-item-1">Registrar nueva categoria</h2>
+                                <h2 class="animation animated-item-1">Gestionar pregunta</h2>
                                     <div class="row" >
                                         <aside class="col-sm-4 col-sm-push-8">
 
@@ -24,14 +23,19 @@
                                                 <div class="blog-item" style="background-image: url(/static/images/form/form2.jpg)">
                                                     <div class="container page">
                                                         <div class="row">
+                                                            <script language="JavaScript"> 
+                                                                function confirmar ( mensaje ) { 
+                                                                    return confirm( mensaje ); 
+                                                                } 
+                                                            </script>
                                                             <div class="col-xs-2"></div>
                                                             <div class="col-xs-8">
-                                                            <form class="form-horizontal" role="form" method="post">
-                                                                <legend color="black">Registrar</legend>
-                                                                        {{form.as_ul}}
-                                                                        {% csrf_token %}
-                                                                    <button type="submit" class="btn btn-primary">Registrar</button>
-                                                            </form>             
+                                                            {% for i in lista %}
+                                                                <ul>
+                                                                <h3 class"text-danger">{{i.Titulo}}<h3>
+                                                                <li><a href="/modificar/{{i.id}}">Modificar</a>
+                                                                <a href="/eliminar/{{i.id}}" onclick="return confirmar('¿Está seguro que desea eliminar el registro?')">eliminar</a></li></ul>
+                                                            {% endfor %}             
                                                             </div>
                                                         </div>
                                                     </div>
@@ -46,6 +50,7 @@
                 </div>
             </div>
         </div>
-    </section>  
+    </section>                                                          
+                                                                       
     {% include "includes/pie.html" %}
 {%endblock%}

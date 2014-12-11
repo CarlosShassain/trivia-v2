@@ -8,12 +8,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.sessions.backends.db import SessionStore
+from captcha.fields import ReCaptchaField
 # Create your views here.
 def index(request):
+	menu=permisos(request)
 	usuarios=User.objects.all()
-	return render_to_response("index/index.html",{'usuarios':usuarios},context_instance=RequestContext(request))
+	return render_to_response("index/index.html",{'menu':menu,'usuarios':usuarios},context_instance=RequestContext(request))
 
 def registro_view(request):
+	menu=permisos(request)
 	if request.method=="POST":
 		formulario_registro=fusuario(request.POST)
 		if formulario_registro.is_valid():
@@ -26,7 +29,7 @@ def registro_view(request):
 			return HttpResponseRedirect("/login/")
 	else:
 		formulario_registro=fusuario()
-	return render_to_response("user/registrarse.html",{'formulario':formulario_registro},context_instance=RequestContext(request))
+	return render_to_response("user/registrarse.html",{'menu':menu,'formulario':formulario_registro},context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method=="POST":
@@ -60,7 +63,7 @@ def login_view(request):
 				aux=request.session['cont']
 				estado=True
 				mensaje="Error en los datos "+str(aux)
-				if aux>3:
+				if aux>2:
 					formulario2=fcapcha()
 					datos={'formulario':formulario,'formulario2':formulario2,'estado':estado,'mensaje':mensaje}
 				else:
@@ -72,6 +75,7 @@ def login_view(request):
 	return render_to_response("user/login.html",{'formulario':formulario},context_instance=RequestContext(request))
 
 def activar_view(request):
+	menu=permisos(request)
 	if request.user.is_authenticated():
 		usuario=request.user
 		if usuario.is_active:
@@ -88,16 +92,31 @@ def activar_view(request):
 					return HttpResponseRedirect("/perfil/")
 			else:
 				formulario=fperfil()
-			return render_to_response("user/activar.html",{'formulario':formulario},context_instance=RequestContext(request))
+			return render_to_response("user/activar.html",{'menu':menu,'formulario':formulario},context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect("/login/")
+def editar_perfil(request):
+	if request.user.is_authenticated():
+		us=request.user
+		usuario=User.objects.get(username=us)
+		perfil_usuario=Perfil.objects.get(user=usuario)
+		if request.method=="POST":
+			formulario=fperfil_modificar(request.POST,request.FILES,instance=perfil_usuario)
+			if formulario.is_valid():
+				formulario.save()
+				return HttpResponseRedirect("/perfil/")
+		else:
+			formulario=fperfil_modificar(instance=perfil_usuario)
+			return render_to_response("user/modificar.html",{"formulario":formulario},RequestContext(request))
 	else:
 		return HttpResponseRedirect("/login/")
 
-
 def perfil_view(request):
-	return render_to_response("user/perfil.html",{},context_instance=RequestContext(request))
+	menu=permisos(request)
+	return render_to_response("user/perfil.html",{'menu':menu,},context_instance=RequestContext(request))
 def gamer_view(request):
 	idsession=request.session["idkey"]
-	return HttpResponseRedirect("http://localhost:3001/game/"+idsession)
+	return HttpResponseRedirect("http://localhost:3001/gamers/"+idsession)
 def logout_view(request):
 	p=SessionStore(session_key=request.session["idkey"])
 	p["estado"]="desconectado"
@@ -105,3 +124,17 @@ def logout_view(request):
 	p.save()
 	logout(request)
 	return HttpResponseRedirect("/")
+
+def permisos(request):
+	listadepermisos=[]
+	usuario=request.user
+	if usuario.has_perm("pregunta.add_categorias"):
+		listadepermisos.append({"url":"/categoria/","label":"agregar categorias"})
+	if usuario.has_perm("pregunta.add_pregunta"):
+		listadepermisos.append({"url":"/pregunta/","label":"agregar preguntas"})
+	if usuario.has_perm("pregunta.add_respuestas_opcionales"):
+		listadepermisos.append({"url":"/respuesta/","label":"agregar respuestas"})
+	if usuario.has_perm("pregunta.change_pregunta"):
+		if usuario.has_perm("pregunta.delete_pregunta"):
+			listadepermisos.append({"url":"/gestion/","label":"gestionar preguntas"})
+	return listadepermisos

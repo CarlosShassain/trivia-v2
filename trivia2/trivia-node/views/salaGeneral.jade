@@ -1,0 +1,61 @@
+extends layout
+
+block content
+ section#main-slider.no-margin
+  div(class="carousel slide wet-asphalt")
+   div(class="carousel-inner")
+    div(class="item active", style="background-image: url(/images/slider/bg1.jpg)")
+     div(class="container")
+      div(class="row")
+       div(class="col-sm-12")
+        div(class="carousel-content centered")
+         h2(class="animation animated-item-1") Sala -#{username}
+         input(type="hidden", id="nickname", value="#{username}")
+         div(class="row")
+          aside(class="col-sm-4 col-sm-push-8")
+           div(class="col-md-10")
+            div(class="panel panel-info")
+             div(class="panel-heading")
+               ONLINE USUARIO EN LINEA
+             div(class="panel-body bg-primary")
+              ul(id="UserL", class="media-list")
+           
+          div(class="col-sm-8 col-sm-pull-4")
+            h2 Esperando jugadores
+             div(class="panel panel-primary")
+               div(class="col-md-12")
+                div(class="panel panel-info")
+                 div(class="panel-heading ")
+                  RECENT SALA DE CHAT
+                 div(id="mensajes",class="panel-body bg-primary")
+                 div(class="panel-info")
+                 input(type="text", class="form-control", placeholder="Escribir mensaje", id="mensaje")
+            button(id="cre", class="btn btn-info", data-toggle="modal", data-target="#ejemplo") Crear sala
+ -if(room.length > 0)
+  section(id="uno", class="container bg-info")
+    ul(class="portfolio-filter")
+     li
+      a(class="btn btn-danger active", href="#", data-filter="*") mostrar todo
+     li
+      a(class="btn btn-default", href="#", data-filter=".item") Items
+     li
+      a(class="btn btn-default", href="#", data-filter=".heroes") Heroes
+     li
+      a(class="btn btn-default", href="#", data-filter=".poderes") Poderes
+    ul(class="portfolio-items col-4")
+     -for(i in room) 
+      li(class="portfolio-item notiene")
+       div(class="item-inner")
+        div(class="center")
+        p
+          img(class="img-responsive img-thumbnail img-circle", src="/images/blog/blog1.jpg" alt="algo")
+        div(class="center")
+         h5 #{room[i].titulo}
+         p no entrar si no sabes perder
+         p #{room[i].tiempo} seg. para responder
+         a(id="unirse", href="#", class="btn btn-primary btn-md") Entrar
+         input(type="hidden", id="idsal" value="#{room[i].id}")
+         h5 #{room[i].pregunta} preguntas
+         input(type="hidden", id="href" value="#{room[i].path}")
+         input(type="hidden", id="nomb" value="#{room[i].titulo}")
+      
